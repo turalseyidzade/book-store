@@ -2,8 +2,8 @@ package azcompany.final_project.service.impl;
 
 import azcompany.final_project.file.FileStorage;
 import azcompany.final_project.mapper.FileMapper;
-import azcompany.final_project.model.dto.FileSaveDetail;
-import azcompany.final_project.model.dto.UploadResponse;
+import azcompany.final_project.model.dto.response.FileSaveDetail;
+import azcompany.final_project.model.dto.response.UploadResponse;
 import azcompany.final_project.model.entity.BaseFileEntity;
 import azcompany.final_project.repository.BaseFileRepository;
 import azcompany.final_project.service.abstracts.FileService;

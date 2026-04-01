@@ -1,4 +1,4 @@
-package azcompany.final_project.model.dto;
+package azcompany.final_project.model.dto.response;
 
 import lombok.*;
 

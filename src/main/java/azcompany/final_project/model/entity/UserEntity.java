@@ -2,18 +2,18 @@ package azcompany.final_project.model.entity;
 
 import azcompany.final_project.model.enums.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Setter
 @Getter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
 public class UserEntity extends BaseEntity {
+    private String firstName;
+    private String lastName;
 
     @Column(unique = true)
     private String email;

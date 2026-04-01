@@ -1,6 +1,6 @@
 package azcompany.final_project.controller;
 
-import azcompany.final_project.model.dto.UploadResponse;
+import azcompany.final_project.model.dto.response.UploadResponse;
 import azcompany.final_project.service.abstracts.FileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

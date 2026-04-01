@@ -1,6 +1,6 @@
 package azcompany.final_project.mapper;
 
-import azcompany.final_project.model.dto.UploadResponse;
+import azcompany.final_project.model.dto.response.UploadResponse;
 import azcompany.final_project.model.entity.BaseFileEntity;
 import org.springframework.stereotype.Component;
 
