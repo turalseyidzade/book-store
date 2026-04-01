@@ -1,10 +1,10 @@
-package com.demo;
+package azcompany.final_project;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TuralFinalProjectApplicationTests {
+class ApplicationTests {
 
     @Test
     void contextLoads() {

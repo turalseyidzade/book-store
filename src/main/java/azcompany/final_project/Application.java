@@ -1,13 +1,13 @@
-package com.demo;
+package azcompany.final_project;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TuralFinalProjectApplication {
+public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(TuralFinalProjectApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
 }
