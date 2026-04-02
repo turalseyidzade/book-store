@@ -18,6 +18,7 @@ import azcompany.final_project.service.abstracts.AuthService;
 import azcompany.final_project.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,6 +39,9 @@ public class AuthServiceImpl implements AuthService {
     private final JwtUtil jwtUtil;
     private final RefreshTokenRepository refreshTokenRepository;
     private final RefreshTokenMapper refreshTokenMapper;
+
+    @Value("${spring.jwt.refresh.expiration}")
+    private long refreshTokenExpiration;
 
     @Override
     public UserResponse register(RegisterRequest request, Role role) {
@@ -68,7 +72,7 @@ public class AuthServiceImpl implements AuthService {
         RefreshTokenEntity refreshTokenEntity = refreshTokenRepository.findByUser(userEntity)
                 .map(foundRefreshTokenEntity -> {
                     foundRefreshTokenEntity.setRefreshToken(refreshToken);
-                    foundRefreshTokenEntity.setExpireDate(LocalDateTime.now().plus(300000, ChronoUnit.MILLIS));
+                    foundRefreshTokenEntity.setExpireDate(LocalDateTime.now().plus(refreshTokenExpiration, ChronoUnit.MILLIS));
                     foundRefreshTokenEntity.setRevoked(false);
                     return foundRefreshTokenEntity;
                 })
@@ -90,7 +94,7 @@ public class AuthServiceImpl implements AuthService {
         UUID newRefreshToken = UUID.randomUUID();
 
         refreshTokenEntity.setRefreshToken(newRefreshToken);
-        refreshTokenEntity.setExpireDate(LocalDateTime.now().plus(300000, ChronoUnit.MILLIS));
+        refreshTokenEntity.setExpireDate(LocalDateTime.now().plus(refreshTokenExpiration, ChronoUnit.MILLIS));
         refreshTokenRepository.save(refreshTokenEntity);
 
         TokenRefreshResponse tokenRefreshResponse = TokenRefreshResponse.builder()
