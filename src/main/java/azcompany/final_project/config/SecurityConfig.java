@@ -48,7 +48,10 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.GET, "/v1/categories/**").permitAll()
                                 .requestMatchers(HttpMethod.PUT, "/v1/categories/**").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.DELETE, "/v1/categories/**").hasRole("ADMIN")
-
+                                .requestMatchers(HttpMethod.POST, "/v1/books").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.GET, "/v1/books/**").permitAll()
+                                .requestMatchers(HttpMethod.PUT, "/v1/books/**").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.DELETE, "/v1/books/**").hasRole("ADMIN")
                                 .anyRequest().authenticated())
                 .sessionManagement(sessionManagement ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

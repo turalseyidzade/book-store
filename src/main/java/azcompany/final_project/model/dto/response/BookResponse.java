@@ -1,32 +1,27 @@
-package azcompany.final_project.model.entity;
+package azcompany.final_project.model.dto.response;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
-@Entity
 @Setter
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "books")
-public class BookEntity extends BaseEntity {
+public class BookResponse {
+    private Long id;
     private String title;
     private String author;
-
-    @Column(unique = true)
     private UUID isbn;
     private String description;
     private BigDecimal price;
     private Integer pageCount;
     private Integer stockCount;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private CategoryEntity category;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private BaseFileEntity image;
+    private CategoryResponse category;
+    private String imageUrl;
 }

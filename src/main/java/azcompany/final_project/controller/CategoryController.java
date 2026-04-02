@@ -3,6 +3,7 @@ package azcompany.final_project.controller;
 import azcompany.final_project.model.dto.request.CategoryRequest;
 import azcompany.final_project.model.dto.response.CategoryResponse;
 import azcompany.final_project.service.abstracts.CategoryService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @PostMapping
-    public ResponseEntity<CategoryResponse> createCategory(CategoryRequest request) {
+    public ResponseEntity<CategoryResponse> createCategory(@RequestBody @Valid CategoryRequest request) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(categoryService.save(request));
@@ -39,7 +40,7 @@ public class CategoryController {
 
     @PutMapping("/{id}")
     public ResponseEntity<CategoryResponse> updateCategoryById(
-            CategoryRequest request,
+            @RequestBody @Valid CategoryRequest request,
             @PathVariable Long id
     ) {
         return ResponseEntity
