@@ -2,7 +2,9 @@ package azcompany.final_project.controller;
 
 import azcompany.final_project.model.dto.request.LoginRequest;
 import azcompany.final_project.model.dto.request.RegisterRequest;
+import azcompany.final_project.model.dto.request.TokenRefreshRequest;
 import azcompany.final_project.model.dto.response.LoginResponse;
+import azcompany.final_project.model.dto.response.TokenRefreshResponse;
 import azcompany.final_project.model.dto.response.UserResponse;
 import azcompany.final_project.model.enums.Role;
 import azcompany.final_project.service.abstracts.AuthService;
@@ -33,5 +35,12 @@ public class AuthController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(authService.login(request));
+    }
+
+    @PostMapping("/refresh-token")
+    public ResponseEntity<TokenRefreshResponse> refreshToken(@RequestBody @Valid TokenRefreshRequest request) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(authService.refreshToken(request));
     }
 }

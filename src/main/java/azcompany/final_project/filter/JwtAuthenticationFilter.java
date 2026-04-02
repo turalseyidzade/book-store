@@ -32,6 +32,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
+            System.out.println("Authorization header not present");
             return;
         }
 
@@ -54,6 +55,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
         } catch (Exception e) {
             filterChain.doFilter(request, response);
+            e.printStackTrace();
             return;
         }
         filterChain.doFilter(request, response);
