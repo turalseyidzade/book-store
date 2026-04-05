@@ -5,7 +5,7 @@ import azcompany.final_project.model.dto.request.CartItemUpdateRequest;
 import azcompany.final_project.model.dto.response.CartItemResponse;
 
 public interface CartItemService {
-    CartItemResponse addItem(Long cartId, CartItemAddRequest cartItemAddRequest);
+    CartItemResponse addItem(CartItemAddRequest cartItemAddRequest);
 
     CartItemResponse getItemById(Long id);
 

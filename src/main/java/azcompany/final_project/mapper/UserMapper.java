@@ -17,6 +17,7 @@ public class UserMapper {
 
     public UserResponse toResponse(UserEntity userEntity) {
         return UserResponse.builder()
+                .id(userEntity.getId())
                 .firstName(userEntity.getFirstName())
                 .lastName(userEntity.getLastName())
                 .email(userEntity.getEmail())

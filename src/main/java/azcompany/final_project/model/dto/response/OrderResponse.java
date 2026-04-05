@@ -1,5 +1,6 @@
 package azcompany.final_project.model.dto.response;
 
+import azcompany.final_project.model.enums.OrderStatus;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -10,9 +11,10 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CartResponse {
+public class OrderResponse {
     private Long id;
     private UserResponse user;
-    private List<CartItemResponse> items;
+    private List<OrderItemResponse> orderItems;
     private BigDecimal totalPrice;
+    private OrderStatus status;
 }

@@ -1,6 +1,7 @@
 package azcompany.final_project.repository;
 
 import azcompany.final_project.model.entity.CartEntity;
+import azcompany.final_project.model.entity.UserEntity;
 import org.jspecify.annotations.NullMarked;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,4 +19,6 @@ public interface CartRepository extends JpaRepository<CartEntity, Long> {
             "items.book.image"
     })
     Optional<CartEntity> findById(Long id);
+
+    Optional<CartEntity> findByUser(UserEntity user);
 }

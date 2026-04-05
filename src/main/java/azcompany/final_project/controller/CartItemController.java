@@ -16,14 +16,13 @@ import org.springframework.web.bind.annotation.*;
 public class CartItemController {
     private final CartItemService cartItemService;
 
-    @PostMapping("/{cartId}")
+    @PostMapping
     public ResponseEntity<CartItemResponse> addItem(
-            @PathVariable Long cartId,
             @RequestBody @Valid CartItemAddRequest request
     ) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(cartItemService.addItem(cartId, request));
+                .body(cartItemService.addItem(request));
     }
 
     @GetMapping("/{id}")
