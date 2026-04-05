@@ -51,6 +51,7 @@ public class CartItemServiceImpl implements CartItemService {
                 .book(book)
                 .quantity(quantity)
                 .build();
+        cartEntity.getItems().add(cartItemEntity);
         CartItemEntity savedEntity = cartItemRepository.save(cartItemEntity);
         CartItemResponse cartItemResponse = cartItemMapper.toResponse(savedEntity);
         log.info("CartItemService.addItem.end: {}", cartItemResponse);
