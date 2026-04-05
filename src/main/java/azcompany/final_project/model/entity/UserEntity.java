@@ -21,7 +21,4 @@ public class UserEntity extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    private CartEntity cart;
 }

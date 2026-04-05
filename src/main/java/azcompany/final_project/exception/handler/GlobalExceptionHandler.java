@@ -1,7 +1,9 @@
 package azcompany.final_project.exception.handler;
 
+import azcompany.final_project.exception.custom.AlreadyExistsException;
 import azcompany.final_project.exception.custom.InvalidTokenException;
 import azcompany.final_project.exception.custom.NotFoundException;
+import azcompany.final_project.exception.custom.QuantityException;
 import azcompany.final_project.model.dto.response.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,26 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(AlreadyExistsException.class)
+    public ResponseEntity<ErrorResponse> handleAlreadyExistsException(AlreadyExistsException e) {
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .status(HttpStatus.CONFLICT.value())
+                .timestamp(LocalDateTime.now())
+                .error(e.getMessage())
+                .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(QuantityException.class)
+    public ResponseEntity<ErrorResponse> handleQuantityException(QuantityException e) {
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .error(e.getMessage())
+                .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
 
     @ExceptionHandler(InvalidTokenException.class)
     public ResponseEntity<ErrorResponse> handleInvalidTokenException(InvalidTokenException ex) {

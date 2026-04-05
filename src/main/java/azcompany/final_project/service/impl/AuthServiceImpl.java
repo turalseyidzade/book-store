@@ -9,9 +9,11 @@ import azcompany.final_project.model.dto.request.TokenRefreshRequest;
 import azcompany.final_project.model.dto.response.LoginResponse;
 import azcompany.final_project.model.dto.response.TokenRefreshResponse;
 import azcompany.final_project.model.dto.response.UserResponse;
+import azcompany.final_project.model.entity.CartEntity;
 import azcompany.final_project.model.entity.RefreshTokenEntity;
 import azcompany.final_project.model.entity.UserEntity;
 import azcompany.final_project.model.enums.Role;
+import azcompany.final_project.repository.CartRepository;
 import azcompany.final_project.repository.RefreshTokenRepository;
 import azcompany.final_project.repository.UserRepository;
 import azcompany.final_project.service.abstracts.AuthService;
@@ -23,6 +25,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -39,17 +42,25 @@ public class AuthServiceImpl implements AuthService {
     private final JwtUtil jwtUtil;
     private final RefreshTokenRepository refreshTokenRepository;
     private final RefreshTokenMapper refreshTokenMapper;
+    private final CartRepository cartRepository;
 
     @Value("${spring.jwt.refresh.expiration}")
     private long refreshTokenExpiration;
 
     @Override
+    @Transactional
     public UserResponse register(RegisterRequest request, Role role) {
         log.info("AuthService.register.start: {}", request);
         UserEntity userEntity = userMapper.toEntity(request);
         userEntity.setRole(role);
         userEntity.setPassword(passwordEncoder.encode(request.getPassword()));
         UserEntity savedEntity = userRepository.save(userEntity);
+
+        if (role == Role.USER) {
+            CartEntity cartEntity = new CartEntity();
+            cartEntity.setUser(savedEntity);
+            cartRepository.save(cartEntity);
+        }
         log.info("AuthService.register.end");
         return userMapper.toResponse(savedEntity);
     }
